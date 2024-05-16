@@ -333,8 +333,11 @@ static char *_get_shell(void)
 	if (uid == SLURM_AUTH_NOBODY)
 		uid = getuid();
 
-	if (!(shell = uid_to_shell(uid)))
-		fatal("no user information for user %u", uid);
+	shell = uid_to_shell(uid);
+	if (shell == NULL) {
+		shell = getenv("SHELL") ?: "/bin/sh";
+		warning("no user information for user %u, using '%s' as the shell", uid, shell);
+	}
 
 	return shell;
 }

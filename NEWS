@@ -3,6 +3,7 @@ documents those changes that are of interest to users and administrators.
 
 * Changes in Slurm 24.11.0rc1
 =============================
+ -- salloc now falls back to $SHELL or /bin/sh when getpwuid(3) fails
 
 * Changes in Slurm 24.05.0rc2
 =============================
